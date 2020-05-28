@@ -1,0 +1,188 @@
+@name Nathan AirChime holo by Faz (v 1.0.0 the "base-ics")
+@inputs 
+@outputs 
+@persist 
+@trigger 
+#Hia, Faz speaking here.
+#This e2 is used to easily set up any Nathan P/M(when they come out)/K horn.
+#Follow the config bellow, and you should be golden!
+#Also, feel free to share this with your friends!
+#See ya!!
+
+#P.S. the vec down at the bottom for the position can be changed without too much harm to the e2, so feel free to change as fit!
+#Version 1.0.0
+#=====================================================================#
+    #Start Config
+Type=0 #0 for p3, 1 for p5 hm, 2 for p5 lm, 3 for m3, 4 for m5, 5 for k3, 6 for k5la
+
+Color=vec(17) #color here for the horn
+ColorS=vec(17) #color here for the stand
+#these are the body groups
+B1=0 #bell 1 and so on
+B2=0
+B3=0
+B4=0
+B5=0
+DR=0 #this is the way the horn will face when spawned, 0 is for forward, 1 is backward (helps with funky horn styles)
+ST=0 #do you want your horn to sit on a stand?
+STH=4.5 #height of the stand (anywhere between 0 and 12, but why would you need 12?  Default is 4.5)
+#submaterials/materials
+#S1 = the outer horn.  S2 = the inside of the horn.  SB = the base.  SBp = the horn hose thingy
+S1="models/proppertextures/acrylic"
+S2="models/proppertextures/aluminum"
+SB="models/proppertextures/acrylic"
+SBp="models/proppertextures/enamel_black"
+    #End Config
+#=====================================================================#
+
+entity():setAlpha(0)
+ A=0   
+if(DR==0){
+    Ang=0
+    F=1
+}else{
+    Ang=180
+    F=-1
+}
+if(ST==0){
+    STH=ST
+}else{
+
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, "models/sprops/rectangles_thin/size_1_5/rect_6x6x1_5.mdl")
+holoMaterial(A, SB)
+holoColor(A,ColorS)
+holoScale(A, vec(1.5,1,0.6))
+holoAng(A,entity():toWorld(ang(0,0,0)))
+holoPos(A,entity():toWorld(vec(0,0,-0.5+STH)))
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, "models/sprops/rectangles_thin/size_1_5/rect_6x12x1_5.mdl")
+holoMaterial(A, SB)
+holoColor(A,ColorS)
+holoScale(A, vec(1,1,0.6))
+holoAng(A,entity():toWorld(ang(90,0,0)))
+holoPos(A,entity():toWorld(vec(4.05,0,-6.2+STH))) 
+holoClipEnabled(A,1,1) 
+holoClip(A,1,vec(STH-5,0,0),vec(-1,0,0),0)
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, "models/sprops/rectangles_thin/size_1_5/rect_6x12x1_5.mdl")
+holoMaterial(A, SB)
+holoColor(A,ColorS)
+holoScale(A, vec(1,1,0.6))
+holoAng(A,entity():toWorld(ang(90,0,0)))
+holoPos(A,entity():toWorld(vec(-4.05,0,-6.2+STH)))
+holoClipEnabled(A,1,1) 
+holoClip(A,1,vec(STH-5,0,0),vec(-1,0,0),0)
+
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, "models/sprops/cylinders/size_1/cylinder_1_5x12.mdl")
+holoMaterial(A, SBp)
+holoColor(A,ColorS)
+holoScale(A, vec(1,1,1))
+holoAng(A,entity():toWorld(ang(0,0,0)))
+holoPos(A,entity():toWorld(vec(0,0,-6.2+STH))) 
+holoClipEnabled(A,1,1) 
+holoClip(A,1,vec(0,0,-STH+5),vec(0,0,1),0)
+}
+if(Type==0){
+    Horn="models/nathan/p_series/p3.mdl"
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, Horn)
+holoBodygroup(A,2,B1)
+holoBodygroup(A,3,B2)
+holoBodygroup(A,4,B3)
+holoBodygroup(A,5,B4)
+holoBodygroup(A,6,B5)
+holoEntity(A):setSubMaterial(1,S1)
+holoEntity(A):setSubMaterial(2,S2)
+holoColor(A,Color)
+holoScale(A, vec(1))
+holoAng(A,entity():toWorld(ang(0,Ang,0)))
+holoPos(A,entity():toWorld(vec(0,-0.45*F,7.5+STH))) #vec 0,0,7.5 centers the horn's base on the e2s center, handy i guess
+}elseif(Type==1){
+    Horn="models/nathan/p_series/p5_hm.mdl"
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, Horn)
+holoBodygroup(A,2,B1)
+holoBodygroup(A,3,B2)
+holoBodygroup(A,4,B3)
+holoBodygroup(A,5,B4)
+holoBodygroup(A,6,B5)
+holoEntity(A):setSubMaterial(1,S1)
+holoEntity(A):setSubMaterial(2,S2)
+holoColor(A,Color)
+holoScale(A, vec(1))
+holoAng(A,entity():toWorld(ang(0,Ang,0)))
+holoPos(A,entity():toWorld(vec(0,-0.45*F,7.5+STH)))
+}elseif(Type==2){
+    Horn="models/nathan/p_series/p5_lm.mdl"
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, Horn)
+holoBodygroup(A,2,B1)
+holoBodygroup(A,3,B2)
+holoBodygroup(A,4,B3)
+holoBodygroup(A,5,B4)
+holoBodygroup(A,6,B5)
+holoEntity(A):setSubMaterial(1,S1)
+holoEntity(A):setSubMaterial(2,S2)
+holoColor(A,Color)
+holoScale(A, vec(1))
+holoAng(A,entity():toWorld(ang(0,Ang,0)))
+holoPos(A,entity():toWorld(vec(0,0*F,7+STH)))
+}elseif(Type==3){
+    Horn=""
+    print("sorry, but this model is not yet in the game, but will be added as soon as possible :3")
+}elseif(Type==4){
+    Horn=""
+    print("sorry, but this model is not yet in the game, but will be added as soon as possible :3")
+}elseif(Type==5){
+    Horn="models/nathan/k_series/k3.mdl"
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, Horn)
+holoBodygroup(A,2,B1)
+holoBodygroup(A,3,B2)
+holoBodygroup(A,4,B3)
+holoBodygroup(A,5,B4)
+holoBodygroup(A,6,B5)
+holoEntity(A):setSubMaterial(1,S1)
+holoEntity(A):setSubMaterial(2,S2)
+holoColor(A,Color)
+holoScale(A, vec(1))
+holoAng(A,entity():toWorld(ang(0,Ang+90,0)))
+holoPos(A,entity():toWorld(vec(0,0*F,1+STH)))
+}elseif(Type==6){
+    Horn="models/nathan/k_series/k5la.mdl"
+A++
+holoCreate(A)
+holoParent(A,entity())
+holoModel(A, Horn)
+holoBodygroup(A,1,B1)
+holoBodygroup(A,2,B2)
+holoBodygroup(A,3,B3)
+holoBodygroup(A,4,B4)
+holoBodygroup(A,5,B5)
+holoEntity(A):setSubMaterial(1,S1)
+holoEntity(A):setSubMaterial(2,S2)
+holoColor(A,Color)
+holoScale(A, vec(1))
+holoAng(A,entity():toWorld(ang(0,Ang+90,0)))
+holoPos(A,entity():toWorld(vec(0,0*F,3.9+STH)))
+}
+
+
